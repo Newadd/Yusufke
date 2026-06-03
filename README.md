@@ -1,6 +1,4 @@
-
-
-# Hydra-ESP
+# Hydra-ESP32-S3 Version
 
 <div align="center">
 <img src="resources/hydra_logo.png" alt="Hydra-ESP Logo" width="350"/>
@@ -25,6 +23,8 @@ A wireless security research firmware for the ESP32 microcontroller. Built on to
 
 - ESP32 DevKit V1 or any board based on the ESP32 (Xtensa LX6 dual-core) SoC. The firmware is developed and tested on the standard 38-pin DevKit V1. Other ESP32 variants with the same chip such as the ESP32-WROOM-32 and ESP32-WROVER modules are expected to work. ESP32-S2, S3, C3, and other variants are not supported as they use different hardware radio architectures.
 
+- NOTE: This version/branch has been tested on the ESP32-S3 (16MB Flash, 8MB PSRAM) and works correctly. The build procedure is identical to the classic ESP32.
+
 **Optional**
 
 - SSD1306 OLED display (128x64, I2C). When connected, the display shows live attack timers, current attack status, menu navigation, captured passwords from the Evil Twin module, and device logs. The firmware auto-detects the display on boot. If no display is found, initialisation is skipped silently and all functionality remains available through the web interface.
@@ -38,15 +38,16 @@ The ESP32 runs its own Wi-Fi access point (management AP) on boot. You connect a
 The management AP is temporarily disabled during some attacks that require exclusive use of the radio (Deauth, Evil Twin, Super Clone). For those attacks, you lose the web interface connection while the attack runs. A configurable timeout brings the device back automatically. Without a timeout set, a power cycle is required to stop the attack and restore access.
 
 ---
+
 ## Dependencies
- 
-| Library | License |
-|---|---|
-| [u8g2-hal-esp-idf](https://github.com/mkfrey/u8g2-hal-esp-idf) | See repo |
-| [ESP32-BLE-Keyboard](https://github.com/T-vK/ESP32-BLE-Keyboard) | See repo |
-| [u8g2](https://github.com/olikraus/u8g2) | BSD 2-Clause |
-| [esp-nimble-cpp](https://github.com/h2zero/esp-nimble-cpp) | Apache 2.0 |
- 
+
+| Library                                                          | License      |
+| ---------------------------------------------------------------- | ------------ |
+| [u8g2-hal-esp-idf](https://github.com/mkfrey/u8g2-hal-esp-idf)   | See repo     |
+| [ESP32-BLE-Keyboard](https://github.com/T-vK/ESP32-BLE-Keyboard) | See repo     |
+| [u8g2](https://github.com/olikraus/u8g2)                         | BSD 2-Clause |
+| [esp-nimble-cpp](https://github.com/h2zero/esp-nimble-cpp)       | Apache 2.0   |
+
 ---
 
 ## Attacks
@@ -106,6 +107,7 @@ Clones the target AP's SSID and BSSID onto the ESP32 on the same channel. Both t
 Make multiple clones with the same SSID names by adding some spaces with the name.
 
 ---
+
 ### BLE Spam
 
 Broadcasts Bluetooth Low Energy advertisement packets that mimic Apple, Samsung, and Google device proximity pairing signals. iPhones, iPads, and Android devices display pairing popups for nearby audio devices, setup notifications for Apple TV, HomePod, Vision Pro, and others. The target device type is selectable. Random MAC address rotation is supported.
@@ -114,7 +116,7 @@ Supported targets include AirPods (all generations), AirPods Pro (all generation
 
 ---
 
-### BT Payload 
+### BT Payload
 
 Advertises the ESP32 as a Bluetooth HID keyboard under the name "Hydra-RandomNumber". When a Windows PC pairs with it, the firmware sends keystrokes to perform the payloads.
 
@@ -140,11 +142,11 @@ Accessible at `http://192.168.4.1` after connecting to the device's management A
 
 ## Default Credentials
 
-| Field    | Default         |
-|----------|-----------------|
-| SSID     | `hydra`  |
-| Password | `notforfun`  |
-| Web UI   | `192.168.4.1`   |
+| Field    | Default       |
+| -------- | ------------- |
+| SSID     | `hydra`       |
+| Password | `notforfun`   |
+| Web UI   | `192.168.4.1` |
 
 Credentials can be changed from the Settings tab and are persisted to NVS flash across reboots.
 
@@ -152,12 +154,12 @@ Credentials can be changed from the Settings tab and are persisted to NVS flash 
 
 ## Credits
 
-| Role | Name |
-|---|---|
-| Lead Developer | Sameer Al Sahab |
-| Original Codebase | [risinek](https://github.com/risinek/esp32-wifi-penetration-tool) |
-| Inspiration | [spacehuhn](https://github.com/SpacehuhnTech/esp8266_deauther) |
-| BLE Spam Code | [justcallmekoko and ckcr4lyf](https://github.com/ckcr4lyf/EvilAppleJuice-ESP32)
+| Role              | Name                                                                            |
+| ----------------- | ------------------------------------------------------------------------------- |
+| Lead Developer    | Sameer Al Sahab                                                                 |
+| Original Codebase | [risinek](https://github.com/risinek/esp32-wifi-penetration-tool)               |
+| Inspiration       | [spacehuhn](https://github.com/SpacehuhnTech/esp8266_deauther)                  |
+| BLE Spam Code     | [justcallmekoko and ckcr4lyf](https://github.com/ckcr4lyf/EvilAppleJuice-ESP32) |
 
 ---
 

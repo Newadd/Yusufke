@@ -1,0 +1,2 @@
+source S:/Arduino/hydra-repo/ESP32-Deauther/build/gdbinit/symbols
+source S:/Arduino/hydra-repo/ESP32-Deauther/build/gdbinit/connect

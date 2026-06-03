@@ -1,0 +1,5 @@
+-mlongcalls
+-fno-builtin-memcpy
+-fno-builtin-memset
+-fno-builtin-bzero
+"-specs=S:/Arduino/hydra-repo/ESP32-Deauther/build/specs/picolibc.specs"
