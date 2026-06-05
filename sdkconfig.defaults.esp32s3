@@ -1,0 +1,5 @@
+# ESP32-S3 specific defaults
+# These override sdkconfig.defaults when building for esp32s3 target.
+# @see https://docs.espressif.com/projects/esp-idf/en/v5.1.2/esp32s3/api-guides/build-system.html#target-dependencies
+
+CONFIG_IDF_TARGET="esp32s3"
