@@ -24,6 +24,7 @@
 #include "esp_random.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include <endian.h>
 
 #include "wifi_controller.h"
 #include "wsl_bypasser.h"

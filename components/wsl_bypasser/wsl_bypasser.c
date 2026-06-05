@@ -9,7 +9,6 @@
 #include "wsl_bypasser.h"
 
 #include <stdint.h>
-#include <stdbool.h>
 #include <string.h>
 
 #define LOG_LOCAL_LEVEL ESP_LOG_DEBUG
@@ -36,22 +35,12 @@ static const uint8_t deauth_frame_default[] = {
 };
 
 /**
- * @brief Wrapper that overrides the original ieee80211_raw_frame_sanity_check
- *        via linker --wrap flag. This bypasses the frame type filter in
- *        esp_wifi_80211_tx(), allowing deauth/disassoc/raw frames to be sent.
- *
- * @see https://forum.arduino.cc/t/an-arbitrary-raw-wifi-frame-transmission-on-esp32-s2-s3/1437789
- * @see https://github.com/GANESH-ICMC/esp32-deauther
- *
- * Works on ESP32, ESP32-S2, and ESP32-S3.
- * The linker flag -Wl,--wrap=ieee80211_raw_frame_sanity_check redirects all
- * internal calls inside libnet80211.a to this wrapper instead.
+ * @brief Decomplied function that overrides original one at compilation time.
+ * 
+ * @attention This function is not meant to be called!
+ * @see Project with original idea/implementation https://github.com/GANESH-ICMC/esp32-deauther
  */
-int __wrap_ieee80211_raw_frame_sanity_check(int ifx, const void *buffer, int len, bool auto_seq) {
-    (void)ifx;
-    (void)buffer;
-    (void)len;
-    (void)auto_seq;
+int ieee80211_raw_frame_sanity_check(int32_t arg, int32_t arg2, int32_t arg3){
     return 0;
 }
 
